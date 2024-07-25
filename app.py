@@ -11,7 +11,8 @@ from utils import format_season, format_metric
 def create_app():
     load_figure_template('quartz')
     app = Dash(__name__, external_stylesheets=[dbc.themes.QUARTZ], suppress_callback_exceptions=True)
-
+    server = app.server
+    
     # Create components
     season_select = comp.create_season_select()
     metric_tabs = comp.create_metrics_tabs()
