@@ -1,9 +1,9 @@
 import components as comp
 from dash import Dash, html, dcc, Input, Output
 from dash_bootstrap_templates import load_figure_template
+from database.setup import setup, check_database_exists
 import database.queries as db
 import dash_bootstrap_components as dbc
-import pandas as pd
 import plotly.express as px
 from utils import format_season, format_metric
 
@@ -114,4 +114,7 @@ def update_team_stats_scatter_chart(season_id, metric):
 
 # Run the app
 if __name__ == '__main__':
+    # create database if it does not exist
+    if not check_database_exists():
+        setup()
     app.run_server(debug=True)

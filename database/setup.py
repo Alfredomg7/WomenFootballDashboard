@@ -151,5 +151,8 @@ def setup():
     except Exception as e:
         print(f'An unexpected error occurred during setup: {e}')
 
+def check_database_exists():
+    return os.path.exists('database/ewf.db')
+
 if  __name__ == '__main__':
     setup()
