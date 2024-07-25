@@ -18,12 +18,7 @@ team_stats_bar_chart = dcc.Graph(id='team-stats-chart', className='my-3')
 team_stats_scatter_chart = dcc.Graph(id='team-stats-scatter-chart', className='my-3')
 footer = comp.create_footer()
 
-# Create a color palette for the teams
-teams_list = db.get_unique_team_names()
-num_teams = len(teams_list)
-color_palette = comp.generate_color_palette(num_teams)
-team_colors = {team: color_palette[i] for i, team in enumerate(teams_list)}
-   
+
 # Combine all components into the layout
 app.layout = html.Div([
     html.H1('England Women\'s Football League Stats (2011-2023)', className='text-center mt-3'),
@@ -54,7 +49,8 @@ def update_team_stats_bar_chart(season_id, metric):
                  title=f"Total {format_metric(metric)} by Team in {format_season(season_id)}", 
                  labels=labels,
                  color='team_name',
-                 color_discrete_map=team_colors)
+                 color_discrete_sequence=comp.generate_color_palette(11)
+                )
     
     fig.update_xaxes(title_text='', tickangle=-45)
     fig.update_yaxes(title_text=format_metric(metric), range=[0, df['total'].max() + 5])
@@ -94,10 +90,10 @@ def update_team_stats_scatter_chart(season_id, metric):
     
     labels = {'total': format_metric(metric), 'date': 'Date', 'team_name': 'Team', 'opponent_name': 'Opponent'}
     
-    fig = px.scatter(df, x='date', y='total', color='team_name', 
+    fig = px.scatter(data_frame=df, x='date', y='total', color='team_name', 
                      title=f'{format_metric(metric)} Over Matches for {format_season(season_id)}',
                      labels=labels,
-                     color_discrete_map=team_colors,
+                     color_discrete_sequence=comp.generate_color_palette(11),
                      hover_data = {'date': True, 'team_name': True, 'opponent_name': True, 'total': True}
                     )
     
