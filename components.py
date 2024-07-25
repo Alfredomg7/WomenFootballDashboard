@@ -58,19 +58,21 @@ def generate_color_palette(num_colors):
     if num_colors <= 0:
         return []
 
-    base_colors = ['#32DE8A', # Esmerald
-                   '#2CA6A4', # Sea Green
-                   '#64E9EE', # Light Blue  
-                   '#449DD1', # Celestial Blue
-                   '#3454D1', # Bright Blue
-                   '#9448BC', # Purple
-                   '#E980FC', # Violet
-                   '#C154C1', # Fuchsia
-                   '#FF007F', # Bright Pink
-                   '#EB7BC0', # Pink
-                   '#E0BAD7', # Light Pink
-                ]
-    
+    base_colors = [
+        "#003366",  # Deep Blue
+        "#3FA7D6",  # Medium Blue
+        "#32DE84",  # Android Green
+        "#F2E94E",  # Lemon Yellow
+        "#FF5666",  # Bright Pink
+        "#90EE90",  # Light Green
+        "#FF6347",  # Tomato
+        "#C71585",  # Medium Violet Red
+        "#FFA07A",  # Light Salmon
+        "#BA55D3",  # Medium Orchid
+        "#40E0D0",  # Turquoise
+        "#B0C4DE"   # Light Steel Blue
+    ]
+        
     base_rgb_colors = [tuple(int(c, 16) for c in (color[i:i+2] for i in (1, 3, 5))) for color in base_colors]
 
     color_palette = []
